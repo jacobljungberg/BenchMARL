@@ -8,6 +8,7 @@ class TaskConfig:
     max_cycles: int = MISSING
     num_agents: int = MISSING
     num_bases: int = MISSING
+    num_emitters: int = MISSING
     num_messages: int = MISSING
     random_base_pose: bool = MISSING 
     antenna_used: bool = MISSING
