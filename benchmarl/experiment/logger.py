@@ -47,7 +47,7 @@ class Logger:
         self.model_name = model_name
         self.group_map = group_map
         self.seed = seed
-
+        self.combined_video = None
         self.calculate_extra = False # OBS: my litte modification for calculating the success percenetage rate of when evaluating at the end
 
         if experiment_config.create_json:
@@ -252,11 +252,18 @@ class Logger:
                 np.transpose(video_frames, (0, 3, 1, 2)),
                 dtype=torch.uint8,
             ).unsqueeze(0)
+            if self.combined_video is None:
+                # Match video size and combine multiple evaluation episodes
+                vid_shape = list(vid.shape)
+                vid_shape[1] = 1
+                self.combined_video = torch.randn(vid_shape)
+            self.combined_video = torch.cat([self.combined_video, vid], dim=1)
             for logger in self.loggers:
                 if isinstance(logger, WandbLogger):
-                    logger.log_video("eval/video", vid, fps=20, commit=False)
+                    logger.log_video("eval/video", vid, fps=2, commit=False)
                 else:
-                    logger.log_video("eval_video", vid, step=step)
+                    logger.log_video("eval_video", vid, step=step, fps=2)
+                    logger.log_video("combined_vid", self.combined_video, step=step, fps=2)
 
     def commit(self):
         for logger in self.loggers:
