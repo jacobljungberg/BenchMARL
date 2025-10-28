@@ -257,13 +257,17 @@ class Logger:
                 vid_shape = list(vid.shape)
                 vid_shape[1] = 1
                 self.combined_video = torch.randn(vid_shape)
-            self.combined_video = torch.cat([self.combined_video, vid], dim=1)
+            if self.combined_video.size(dim=1) < 2000:
+                self.combined_video = torch.cat([self.combined_video, vid], dim=1)
+            else:
+                print("combined vid too large. disabling.")
             for logger in self.loggers:
                 if isinstance(logger, WandbLogger):
                     logger.log_video("eval/video", vid, fps=2, commit=False)
                 else:
                     logger.log_video("eval_video", vid, step=step, fps=2)
-                    logger.log_video("combined_vid", self.combined_video, step=step, fps=2)
+                    if self.combined_video.size(dim=1) < 2000:
+                        logger.log_video("combined_vid", self.combined_video, step=step, fps=2)
 
     def commit(self):
         for logger in self.loggers:
