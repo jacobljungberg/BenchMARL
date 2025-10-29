@@ -9,6 +9,15 @@ from pathlib import Path
 from benchmarl.hydra_config import reload_experiment_from_file
 
 if __name__ == "__main__":
+
+    """
+        Har inte kommit på något bra att slå på csv laddning
+        här. Problemet är ju att setupen är sparad ifrån träningen,
+        så man måste starta ett nytt experiment med modifierade parametrar.
+        Det är ju inget problem egentligen men känns onödigt. Ändra därför 
+        default värdet för pre_determined_scenario direkt i Info_relay_env_v2.py 
+        istället för tillfället
+    """
     parser = argparse.ArgumentParser(
         description="Evaluates the experiment from a checkpoint file."
     )
