@@ -859,7 +859,7 @@ class Experiment(CallbackNotifier):
                         self.test_env.rollout(
                             max_steps=self.max_steps,
                             policy=self.policy,
-                            callback=callback if eval_episode == 0 else None,
+                            callback=callback,
                             auto_cast_to_device=True,
                             break_when_any_done=True,
                         )
