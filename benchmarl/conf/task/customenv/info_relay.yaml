@@ -5,10 +5,10 @@ defaults:
 task: info_relay
 parallel: True
 
-max_cycles: 150 # OBS
-num_agents: 4
+max_cycles: 50 # OBS
+num_agents: 5
 num_bases: 2
-num_emitters: 1 # 1 for jammer, 0 for no jammer
+num_emitters: 0 # 1 for jammer, 0 for no jammer
 
 num_messages: 1
 
@@ -16,4 +16,5 @@ random_base_pose: True # makes the game easier if turned off
 
 antenna_used: False
 
-observe_self: True # OBS change
+observe_self: False # OBS change
+a_max: 0.25
