@@ -13,3 +13,4 @@ class TaskConfig:
     random_base_pose: bool = MISSING 
     antenna_used: bool = MISSING
     observe_self: bool = MISSING
+    a_max: float = MISSING
