@@ -10,7 +10,8 @@ class TaskConfig:
     num_bases: int = MISSING
     num_emitters: int = MISSING
     num_messages: int = MISSING
-    random_base_pose: bool = MISSING 
     antenna_used: bool = MISSING
     observe_self: bool = MISSING
     a_max: float = MISSING
+    num_CL_episodes: int = MISSING
+    num_r_help_episodes: int = MISSING
