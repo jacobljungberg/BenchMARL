@@ -15,3 +15,4 @@ class TaskConfig:
     a_max: float = MISSING
     num_CL_episodes: int = MISSING
     num_r_help_episodes: int = MISSING
+    using_half_velocity: bool = MISSING

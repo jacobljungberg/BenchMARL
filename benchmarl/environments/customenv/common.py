@@ -23,6 +23,12 @@ class CustomEnvTask(Task):
     # Their config will be loaded from conf/task/customenv
 
     INFO_RELAY = None  # Loaded automatically from conf/task/customenv/info_relay
+    INFO_RELAY2 = None
+    INFO_RELAY3 = None
+    INFO_RELAY4 = None
+    INFO_RELAY5 = None
+    INFO_RELAY6 = None
+    INFO_RELAY7 = None
     SIMPLE_TEST = None  # Loaded automatically from conf/task/customenv/task_2
 
     def get_env_fun(
