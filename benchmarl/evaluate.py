@@ -30,6 +30,7 @@ if __name__ == "__main__":
 
     experiment.config.evaluation_episodes = 10000 + 1 # OBS used to evaluate over more episodes. Does not overwrite the old config files! :)
     experiment.logger.calculate_extra = True
+    experiment.config.render = False # If you try to save video for all 10 000 scenarios, Floss will explode
     experiment.evaluate()
     
     # if experiment.task.has_render(experiment.test_env) and experiment.config.render:
