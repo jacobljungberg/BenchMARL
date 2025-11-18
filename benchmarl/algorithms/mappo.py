@@ -70,6 +70,7 @@ class Mappo(Algorithm):
         self.scale_mapping = scale_mapping
         self.use_tanh_normal = use_tanh_normal
         self.minibatch_advantage = minibatch_advantage
+        self.entropy_coef_decay = 0.995
 
     #############################
     # Overridden abstract methods
@@ -233,6 +234,8 @@ class Mappo(Algorithm):
             )
 
         loss = self.get_loss_and_updater(group)[0]
+        loss.entropy_coeff *= self.entropy_coef_decay
+        print("entropy coeff: " + str(loss.entropy_coeff))
         if self.minibatch_advantage:
             increment = -(
                 -self.experiment.config.train_minibatch_size(self.on_policy)

@@ -5,8 +5,8 @@ defaults:
 task: info_relay
 parallel: True
 
-max_cycles: 50 # OBS
-num_agents: 4
+max_cycles: 100 # OBS
+num_agents: 5
 num_bases: 2
 num_emitters: 0 # 1 for jammer, 0 for no jammer
 
@@ -15,8 +15,8 @@ num_messages: 1
 antenna_used: False
 
 observe_self: False # OBS change
-a_max: 0.25
-num_CL_episodes: 0 # curriculum learning
-num_r_help_episodes: 2000 
+a_max: 0.2
+num_CL_episodes: 3000 # curriculum learning
+num_r_help_episodes: 3000 
 
 using_half_velocity: True
