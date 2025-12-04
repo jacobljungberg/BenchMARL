@@ -63,7 +63,9 @@ class CustomEnvTask(Task):
 
     def max_steps(self, env: EnvBase) -> int:
         # Maximum number of steps for a rollout during evaluation
-        return self.config["max_cycles"] 
+        max_steps = round(1.5 * ( (1.1 * (self.config["num_agents"] + 4) + 2) * 5 + self.config["num_agents"] ))
+        print("MAX STEPS : ", max_steps)
+        return max_steps
 
     def group_map(self, env: EnvBase) -> Dict[str, List[str]]:
         # The group map mapping group names to agent names
