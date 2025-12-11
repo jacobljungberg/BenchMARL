@@ -9,14 +9,21 @@ from pathlib import Path
 from benchmarl.hydra_config import reload_experiment_from_file
 
 if __name__ == "__main__":
-
     """
-        Har inte kommit på något bra att slå på csv laddning
-        här. Problemet är ju att setupen är sparad ifrån träningen,
-        så man måste starta ett nytt experiment med modifierade parametrar.
-        Det är ju inget problem egentligen men känns onödigt. Ändra därför 
-        default värdet för pre_determined_scenario direkt i Info_relay_env_v2.py 
-        istället för tillfället
+    Usage: ./evaluate.py <path_to_checkpoint>
+    The checkpoint file is typically named
+    checkpoint_iteration.pt
+
+    Inside info_relay_env_v2.py set pre_determined_actions = True
+    on row 70 to load scenario from test set.
+
+    Running this script with experiment.config.render = True will
+    save video into the same directory as the chosen checkpoint. 
+    If running the last checkpoint, the video is typically named
+    eval_video_1500.mp4
+
+    Evaluation output (csv) is saved in working directory.
+    
     """
     parser = argparse.ArgumentParser(
         description="Evaluates the experiment from a checkpoint file."
@@ -30,42 +37,6 @@ if __name__ == "__main__":
 
     experiment.config.evaluation_episodes = 10000 + 1 # OBS used to evaluate over more episodes. Does not overwrite the old config files! :)
     experiment.logger.calculate_extra = True
-    experiment.config.render = False # If you try to save video for all 10 000 scenarios, Floss will explode
-    experiment.config.evaluation_deterministic_actions = False # use the slighlty noisy policy for evaluation
+    experiment.config.render = False # Use only if fewer evaluation_episodes are set
+    experiment.config.evaluation_deterministic_actions = True # use the slighlty noisy policy for evaluation
     experiment.evaluate()
-    
-    # if experiment.task.has_render(experiment.test_env) and experiment.config.render:
-    #             video_frames = []
-
-    #             def callback(env, td):
-    #                 video_frames.append(
-    #                     experiment.task.__class__.render_callback(experiment, env, td)
-    #                 )
-
-    # else:
-    #     video_frames = None
-    #     callback = None
-
-    # if experiment.test_env.batch_size == ():
-    #             rollouts = []
-    #             for eval_episode in range(experiment.config.evaluation_episodes):
-    #                 rollouts.append(
-    #                     experiment.test_env.rollout(
-    #                         max_steps=experiment.max_steps,
-    #                         policy=experiment.policy,
-    #                         callback=callback if eval_episode == 0 else None,
-    #                         auto_cast_to_device=True,
-    #                         break_when_any_done=True,
-    #                     )
-    #                 )
-    # else:
-    #     rollouts = experiment.test_env.rollout(
-    #         max_steps=experiment.max_steps,
-    #         policy=experiment.policy,
-    #         callback=callback,
-    #         auto_cast_to_device=True,
-    #         break_when_any_done=False,
-    #         # We are running vectorized evaluation we do not want it to stop when just one env is done
-    #     )
-
-    # print(rollouts)
