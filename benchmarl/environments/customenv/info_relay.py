@@ -16,3 +16,4 @@ class TaskConfig:
     num_CL_episodes: int = MISSING
     num_r_help_episodes: int = MISSING
     using_half_velocity: bool = MISSING
+    pre_determined_scenario: bool = MISSING

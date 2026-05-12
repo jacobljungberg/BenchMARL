@@ -35,7 +35,7 @@ if __name__ == "__main__":
     checkpoint_file = str(Path(args.checkpoint_file).resolve())
     experiment = reload_experiment_from_file(checkpoint_file)
 
-    experiment.config.evaluation_episodes = 10000 + 1 # OBS used to evaluate over more episodes. Does not overwrite the old config files! :)
+    experiment.config.evaluation_episodes = 10000 + 1 # used to evaluate over more episodes than the ones during training.
     experiment.logger.calculate_extra = True
     experiment.config.render = False # Use only if fewer evaluation_episodes are set
     experiment.config.evaluation_deterministic_actions = True # use the slighlty noisy policy for evaluation
