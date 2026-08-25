@@ -6,13 +6,13 @@ task: info_relay
 parallel: True
 
 max_cycles: 39 # OBS
-num_agents: 2
+num_agents: 1
 num_bases: 2
 num_emitters: 0 # 1 for jammer, 0 for no jammer
 
 num_messages: 1
 
-antenna_used: True
+antenna_used: False
 
 observe_self: False # OBS change
 a_max: 0.2
@@ -20,5 +20,3 @@ num_CL_episodes: 0 # curriculum learning
 num_r_help_episodes: 0
 
 using_half_velocity: False
-
-pre_determined_scenario: False # use False when training and True when evaluating on a known dataset
